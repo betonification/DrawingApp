@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) {
@@ -18,6 +19,9 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var color = Color.BLACK
     private var canvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
+    var lastColor = "#FF000000"
+    var lastPaintBrushSize = 10.toFloat()
+    var lastEraserSize = 10.toFloat()
 
     init {
         setUpDrawing()
@@ -99,6 +103,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     fun onClear(){
         mPaths.clear()
         invalidate()
+        drawingView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
     }
 
 
