@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         ibClear.setOnClickListener(){
             drawingView.onClear()
         }
+        ibUndo.setOnClickListener(){
+            drawingView.onUndo()
+        }
         ibEraser.setOnClickListener(){
             drawingView.setColor("#FFFFFF")
             drawingView.setSizeForBrush(drawingView.lastEraserSize)
@@ -128,11 +131,14 @@ class MainActivity : AppCompatActivity() {
     
 
     fun paintClicked(view: View){
-            mImageButtonCurrentPaint!!.setImageResource(R.drawable.pallet_normal)
-            (view as ImageButton).setImageResource(R.drawable.pallet_selected)
-            drawingView.setColor(view.tag.toString())
-            drawingView.lastColor = view.tag.toString()
-            mImageButtonCurrentPaint = view
+        mImageButtonCurrentPaint!!.setImageResource(R.drawable.pallet_normal)
+        (view as ImageButton).setImageResource(R.drawable.pallet_selected)
+        drawingView.setColor(view.tag.toString())
+        drawingView.setSizeForBrush(drawingView.lastPaintBrushSize)
+        brushLastClicked = true
+        eraserLastClicked = false
+        drawingView.lastColor = view.tag.toString()
+        mImageButtonCurrentPaint = view
     }
 
     private fun onFullscreen(){

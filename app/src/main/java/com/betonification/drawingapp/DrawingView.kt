@@ -18,7 +18,8 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var mBrushSize: Float = 0.toFloat()
     private var color = Color.BLACK
     private var canvas: Canvas? = null
-    private val mPaths = ArrayList<CustomPath>()
+    private val mPaths = mutableListOf<CustomPath>()
+    private var drawNumber = 0
     var lastColor = "#FF000000"
     var lastPaintBrushSize = 10.toFloat()
     var lastEraserSize = 10.toFloat()
@@ -86,6 +87,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
             }
             MotionEvent.ACTION_UP ->{
                 mPaths.add(mDrawPath!!)
+                drawNumber++
                 mDrawPath = CustomPath(color,mBrushSize)
             }
             else -> return false
@@ -102,8 +104,17 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
     fun onClear(){
         mPaths.clear()
+        drawNumber = 0
         invalidate()
         drawingView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+    }
+
+    fun onUndo(){
+        if (mPaths.isNotEmpty()) {
+            mPaths.removeAt(drawNumber - 1)
+            drawNumber--
+            invalidate()
+        }
     }
 
 
