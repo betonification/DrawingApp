@@ -191,7 +191,7 @@
             android:id="@+id/ibUndo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/gallery"
+            android:src="@drawable/undo"
             android:contentDescription="gallery_image"
             android:background="#00000000"
             android:scaleType="fitXY"

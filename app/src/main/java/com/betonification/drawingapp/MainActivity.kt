@@ -51,7 +51,11 @@ class MainActivity : AppCompatActivity() {
             eraserLastClicked = false
         }
         ibClear.setOnClickListener(){
-            drawingView.onClear()
+            if (drawingView.mPaths.isNotEmpty()) {
+                drawingView.onClear()
+            }else {
+                iv_background.setImageDrawable(null)
+            }
         }
         ibUndo.setOnClickListener(){
             drawingView.onUndo()
@@ -128,7 +132,6 @@ class MainActivity : AppCompatActivity() {
             onFullscreen()
         }
     }
-    
 
     fun paintClicked(view: View){
         mImageButtonCurrentPaint!!.setImageResource(R.drawable.pallet_normal)

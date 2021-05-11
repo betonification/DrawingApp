@@ -18,7 +18,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var mBrushSize: Float = 0.toFloat()
     private var color = Color.BLACK
     private var canvas: Canvas? = null
-    private val mPaths = mutableListOf<CustomPath>()
+    val mPaths = mutableListOf<CustomPath>()
     private var drawNumber = 0
     var lastColor = "#FF000000"
     var lastPaintBrushSize = 10.toFloat()
@@ -106,7 +106,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         mPaths.clear()
         drawNumber = 0
         invalidate()
-        drawingView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
     }
 
     fun onUndo(){
@@ -123,6 +122,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         mDrawPaint!!.strokeWidth = mBrushSize
     }
 
-    internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {
+    inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {
     }
 }
